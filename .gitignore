@@ -7,3 +7,4 @@ node_modules
 # Scraper cache
 public/layoffs-cache.json
 /tmp/
+.vercel

@@ -13,12 +13,10 @@
     "date-fns": "^4.1.0",
     "fast-xml-parser": "^4.4.0",
     "globe.gl": "^2.45.0",
-    "leaflet": "^1.9.4",
     "next": "14.2.35",
     "react": "^18",
     "react-dom": "^18",
     "react-globe.gl": "^2.37.0",
-    "react-leaflet": "^5.0.0",
     "three": "^0.183.2"
   },
   "devDependencies": {
