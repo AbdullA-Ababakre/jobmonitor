@@ -45,7 +45,7 @@ async function getGreenhouseJobs(): Promise<any[]> {
 async function getRemoteOKJobs(): Promise<any[]> {
   try {
     const res = await fetch('https://remoteok.com/api', {
-      headers: { 'User-Agent': 'TechPulse/1.0 (+https://techpulse.ai)' },
+      headers: { 'User-Agent': 'JobMonitor/1.0 (+https://github.com/AbdullA-Ababakre/jobmonitor)' },
       next: { revalidate: 600 },
     });
     if (!res.ok) return [];

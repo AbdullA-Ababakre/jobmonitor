@@ -1,4 +1,4 @@
-# TechPulse — Real-Time Tech Job Market Intelligence
+# JobMonitor — Real-Time Tech Job Market Intelligence
 ## Stack: Next.js 14 (App Router) + Tailwind + globe.gl + Three.js
 
 ## CRITICAL: The Globe is the Hero
@@ -44,7 +44,7 @@ This is the #1 most important feature. Everything else is secondary.
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  HEADER (sticky, translucent blur backdrop)              │
-│  ⚡ TechPulse  [● LIVE]  [clock]  [layer toggles]       │
+│  ⚡ JobMonitor  [● LIVE]  [clock]  [layer toggles]       │
 ├────────┬──────────────────────────────────┬──────────────┤
 │        │                                  │              │
 │ LAYER  │     3D GLOBE (full screen)       │  LIVE FEED   │
@@ -149,7 +149,7 @@ Total Laid Off 2024: 428,000  |  Currently Hiring: 3,640 roles  |  Top TC: Jane 
 ```
 
 ## Header (`components/Header.tsx`)
-- Logo: `⚡ TechPulse`
+- Logo: `⚡ JobMonitor`
 - Tagline: `Real-time tech job market intelligence`
 - `● LIVE` with CSS pulse animation
 - Live clock (updates every second)

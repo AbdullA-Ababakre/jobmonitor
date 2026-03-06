@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const entry = allLayoffs.find((e) => e.slug === params.slug)
   const company = entry?.company || params.slug
   return {
-    title: `${company} Layoffs | TechPulse`,
+    title: `${company} Layoffs | JobMonitor`,
     description: `Full layoff history and timeline for ${company}. Track every round of layoffs, percentages, and dates.`,
   }
 }
@@ -62,7 +62,7 @@ export default async function CompanyPage({ params }: PageProps) {
             <span className="text-xs text-slate-400">{company}</span>
           </div>
           <Link href="/" className="text-sm font-bold text-white">
-            ⚡ TechPulse
+            ⚡ JobMonitor
           </Link>
         </div>
       </div>

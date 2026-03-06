@@ -42,7 +42,7 @@ export default function Header() {
           boxShadow: '0 0 10px #22c55e', animation: 'hpulse 2s infinite',
         }} />
         <span style={{ fontSize: 18, fontWeight: 800, color: '#e2e8f0', letterSpacing: '-0.03em' }}>
-          ⚡ TechPulse
+          🌍 JobMonitor
         </span>
         <span style={{ fontSize: 11, color: '#334155', marginLeft: 2 }}>
           Real-time tech job market intelligence

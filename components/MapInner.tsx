@@ -19,7 +19,7 @@ export default function MapInner({ layers, onSelectCompany, liveLayoffs = [] }: 
     if (!L) return;
 
     // Init map
-    const map = L.map('techpulse-map', {
+    const map = L.map('jobmonitor-map', {
       center: [30, 10],
       zoom: 2.4,
       zoomControl: false,
@@ -70,7 +70,7 @@ export default function MapInner({ layers, onSelectCompany, liveLayoffs = [] }: 
             <b>${d.company}</b><br>
             <span style="color:#ef4444">🔴 ${d.count.toLocaleString()} laid off (${d.pct}%)</span><br>
             <span style="color:#475569">${d.date} · ${d.sector}</span>
-          </div>`, { className: 'tp-tooltip', sticky: true });
+          </div>`, { className: 'jm-tooltip', sticky: true });
         m.on('click', () => onSelectCompany({ ...d, type: 'layoff' }));
         all.push(m);
 
@@ -95,7 +95,7 @@ export default function MapInner({ layers, onSelectCompany, liveLayoffs = [] }: 
             <b>${d.company}</b><br>
             <span style="color:#22c55e">🟢 ${d.openRoles} open roles</span><br>
             <span style="color:#475569">${d.sector}</span>
-          </div>`, { className: 'tp-tooltip', sticky: true });
+          </div>`, { className: 'jm-tooltip', sticky: true });
         m.on('click', () => onSelectCompany({ ...d, type: 'hiring' }));
         all.push(m);
       });
@@ -112,7 +112,7 @@ export default function MapInner({ layers, onSelectCompany, liveLayoffs = [] }: 
             <b>${d.company}</b><br>
             <span style="color:#fbbf24">💰 Avg TC: $${(d.avgTC/1000).toFixed(0)}k/yr</span><br>
             <span style="color:#475569">${d.sector}</span>
-          </div>`, { className: 'tp-tooltip', sticky: true });
+          </div>`, { className: 'jm-tooltip', sticky: true });
         m.on('click', () => onSelectCompany({ ...d, type: 'topTC' }));
         all.push(m);
       });
@@ -123,10 +123,10 @@ export default function MapInner({ layers, onSelectCompany, liveLayoffs = [] }: 
 
   return (
     <>
-      <div id="techpulse-map" style={{ width: '100%', height: '100%', background: '#060d1a' }} />
+      <div id="jobmonitor-map" style={{ width: '100%', height: '100%', background: '#060d1a' }} />
       <style>{`
         .leaflet-container { background: #060d1a !important; }
-        .tp-tooltip .leaflet-tooltip { background: transparent !important; border: none !important; box-shadow: none !important; padding: 0 !important; }
+        .jm-tooltip .leaflet-tooltip { background: transparent !important; border: none !important; box-shadow: none !important; padding: 0 !important; }
         .leaflet-tooltip { background: transparent; border: none; padding: 0; box-shadow: none; }
         .leaflet-tooltip-left::before, .leaflet-tooltip-right::before { display: none; }
       `}</style>

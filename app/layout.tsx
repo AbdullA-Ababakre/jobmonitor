@@ -2,12 +2,12 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: '⚡ TechPulse — Real-Time Tech Job Market Monitor',
+  title: '🌍 JobMonitor — Real-Time Tech Job Market Intelligence',
   description:
     'Live tech layoffs, hiring trends, and job market signals — Bloomberg Terminal meets layoffs.fyi. Track every layoff, hiring surge, and talent move in real time.',
   keywords: ['tech layoffs', 'hiring', 'job market', 'tech industry', 'layoffs 2024', 'tech news'],
   openGraph: {
-    title: '⚡ TechPulse — Real-Time Tech Job Market Monitor',
+    title: '🌍 JobMonitor — Real-Time Tech Job Market Intelligence',
     description: 'Live tech layoffs and hiring trends. Updated every 5 minutes.',
     type: 'website',
   },
