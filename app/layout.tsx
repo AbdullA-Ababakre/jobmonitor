@@ -24,11 +24,11 @@ export const metadata: Metadata = {
       '49,000 tech layoffs in 57 days. Live layoffs, global talent flow, hot jobs & leaked interview questions — all on one map. Free & open source.',
     images: [
       {
-        url: '/og-image.jpg',
-        width: 1280,
-        height: 687,
-        alt: 'JobMonitor — Real-time tech job market intelligence dashboard',
-        type: 'image/jpeg',
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'JobMonitor — The CIA for the Tech Job Market',
+        type: 'image/png',
       },
     ],
     locale: 'en_US',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: 'JobMonitor — The CIA for the Tech Job Market 🌍',
     description:
       '49,000 tech layoffs in 57 days. Live layoffs, global talent flow, hot jobs & leaked interview questions — all on one map. Free & open source.',
-    images: ['/og-image.jpg'],
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,
