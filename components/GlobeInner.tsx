@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef, useMemo } from 'react';
-import Globe from 'globe.gl';
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const Globe = require('globe.gl').default ?? require('globe.gl');
 import { LAYOFFS, HIRING, TALENT_ARCS, TOP_TC } from '@/lib/data';
 
 interface Layers { layoffs: boolean; hiring: boolean; topTC: boolean; talent: boolean; }
