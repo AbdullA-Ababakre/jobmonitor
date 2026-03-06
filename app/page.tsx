@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 import LayerPanel from '@/components/LayerPanel';
 import BottomPanels from '@/components/BottomPanels';
 
-const GlobeWrapper = dynamic(() => import('@/components/GlobeWrapper'), { ssr: false });
+const MapWrapper = dynamic(() => import('@/components/MapWrapper'), { ssr: false });
 
 interface Layers { layoffs: boolean; hiring: boolean; topTC: boolean; talent: boolean; }
 
@@ -28,7 +28,7 @@ export default function Home() {
 
       {/* Map — top 55% */}
       <div style={{ flex: '0 0 55%', position: 'relative', overflow: 'hidden', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-        <GlobeWrapper layers={layers} onSelectCompany={setSelected} liveLayoffs={liveLayoffs} />
+        <MapWrapper layers={layers} onSelectCompany={setSelected} liveLayoffs={liveLayoffs} />
 
         {/* Layer panel — overlaid top-left on map */}
         <div style={{ position: 'absolute', top: 12, left: 12, zIndex: 500 }}>
