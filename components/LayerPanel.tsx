@@ -26,8 +26,8 @@ export default function LayerPanel({ layers, onChange }: Props) {
 
   return (
     <div style={{
-      position: 'fixed', left: 16, top: '50%', transform: 'translateY(-50%)',
-      zIndex: 20, background: 'rgba(6,13,26,0.88)',
+      position: 'relative',
+      background: 'rgba(6,13,26,0.88)',
       backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.07)',
       borderRadius: 14, padding: '16px 14px', display: 'flex',
       flexDirection: 'column', gap: 6, minWidth: 168,
