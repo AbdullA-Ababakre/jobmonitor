@@ -1,15 +1,54 @@
 import type { Metadata } from 'next'
 import './globals.css'
 
+const BASE_URL = 'https://jobmonitor.co'
+
 export const metadata: Metadata = {
-  title: '🌍 JobMonitor — Real-Time Tech Job Market Intelligence',
+  metadataBase: new URL(BASE_URL),
+  title: 'JobMonitor — The CIA for the Tech Job Market',
   description:
-    'Live tech layoffs, hiring trends, and job market signals — Bloomberg Terminal meets layoffs.fyi. Track every layoff, hiring surge, and talent move in real time.',
-  keywords: ['tech layoffs', 'hiring', 'job market', 'tech industry', 'layoffs 2024', 'tech news'],
+    '49,000 tech layoffs in 57 days. AI is eating the job market alive. JobMonitor tracks every layoff, talent flow, hot job, and leaked interview question — live, on one map. Free. Open source.',
+  keywords: [
+    'tech layoffs 2026', 'tech layoffs map', 'job market intelligence',
+    'AI layoffs', 'hiring trends', 'interview questions', 'talent flow',
+    'Block layoffs', 'Amazon layoffs', 'Meta layoffs', 'jobmonitor'
+  ],
+  authors: [{ name: 'InterviewCoder', url: 'https://interviewcoder.co' }],
+  creator: 'InterviewCoder',
   openGraph: {
-    title: '🌍 JobMonitor — Real-Time Tech Job Market Intelligence',
-    description: 'Live tech layoffs and hiring trends. Updated every 5 minutes.',
     type: 'website',
+    url: BASE_URL,
+    siteName: 'JobMonitor',
+    title: 'JobMonitor — The CIA for the Tech Job Market 🌍',
+    description:
+      '49,000 tech layoffs in 57 days. Live layoffs, global talent flow, hot jobs & leaked interview questions — all on one map. Free & open source.',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1280,
+        height: 687,
+        alt: 'JobMonitor — Real-time tech job market intelligence dashboard',
+        type: 'image/jpeg',
+      },
+    ],
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@interviewcoder',
+    creator: '@interviewcoder',
+    title: 'JobMonitor — The CIA for the Tech Job Market 🌍',
+    description:
+      '49,000 tech layoffs in 57 days. Live layoffs, global talent flow, hot jobs & leaked interview questions — all on one map. Free & open source.',
+    images: ['/og-image.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+  alternates: {
+    canonical: BASE_URL,
   },
 }
 
