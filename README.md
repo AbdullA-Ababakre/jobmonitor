@@ -8,6 +8,8 @@ Track layoffs, hiring surges, talent flow, and salary data across the global tec
 
 🌐 **Live at [jobmonitor.co](https://jobmonitor.co)**
 
+![JobMonitor Dashboard](public/preview.png)
+
 ---
 
 ## ✨ Features
