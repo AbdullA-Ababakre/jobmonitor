@@ -1,0 +1,9 @@
+node_modules
+.next
+.env.local
+.env
+*.log
+
+# Scraper cache
+public/layoffs-cache.json
+/tmp/
