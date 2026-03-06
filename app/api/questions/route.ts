@@ -101,7 +101,7 @@ export async function GET() {
             ?.trim()
             ?.slice(0, 120) || '';
 
-          const allTags = [...new Set(questions.flatMap((q: any) => q.tags || []))].slice(0, 4);
+          const allTags = Array.from(new Set(questions.flatMap((q: any) => q.tags || []))).slice(0, 4);
           const company = cleanCompany(post.company || 'Unknown');
 
           return {
