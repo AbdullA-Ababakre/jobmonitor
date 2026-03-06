@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { TOP_TC, TALENT_ARCS } from '@/lib/data';
 
-interface Props { onSelectCompany: (c: any) => void; }
+interface Props { onSelectCompany: (c: any) => void; isMobile?: boolean; }
 
 const SALARY = [
   { city: 'San Francisco', avg: 285, yoy: +4.2 },
@@ -61,11 +61,12 @@ function Spinner() {
   return <div style={{ padding: 20, textAlign: 'center', color: '#334155', fontSize: 11, fontFamily: 'monospace' }}>Fetching live data...</div>;
 }
 
-export default function BottomPanels({ onSelectCompany }: Props) {
+export default function BottomPanels({ onSelectCompany, isMobile }: Props) {
   const [layoffs, setLayoffs] = useState<any[]>([]);
   const [jobs, setJobs] = useState<any[]>([]);
   const [questions, setQuestions] = useState<any[]>([]);
   const [loading, setLoading] = useState({ layoffs: true, jobs: true, questions: true });
+  const [activeTab, setActiveTab] = useState<'layoffs'|'jobs'|'questions'|'talent'>('layoffs');
 
   useEffect(() => {
     fetch('/api/layoffs')
@@ -93,6 +94,40 @@ export default function BottomPanels({ onSelectCompany }: Props) {
       })
       .catch(() => setLoading(l => ({ ...l, questions: false })));
   }, []);
+
+  const TABS = [
+    { key: 'layoffs',   label: '🔴 Layoffs' },
+    { key: 'jobs',      label: '🟢 Jobs' },
+    { key: 'questions', label: '🔓 Questions' },
+    { key: 'talent',    label: '🔄 Talent' },
+  ] as const;
+
+  if (isMobile) {
+    return (
+      <div style={{ background: '#060d1a', borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', flexDirection: 'column' }}>
+        {/* Tab bar */}
+        <div style={{ display: 'flex', borderBottom: '1px solid rgba(255,255,255,0.07)', flexShrink: 0, overflowX: 'auto' }}>
+          {TABS.map(tab => (
+            <button key={tab.key} onClick={() => setActiveTab(tab.key)}
+              style={{
+                flex: 1, padding: '10px 4px', background: 'none', border: 'none',
+                borderBottom: activeTab === tab.key ? '2px solid #818cf8' : '2px solid transparent',
+                color: activeTab === tab.key ? '#e2e8f0' : '#475569',
+                fontSize: 10, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap',
+                fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em',
+                transition: 'color 0.15s',
+              }}>
+              {tab.label}
+            </button>
+          ))}
+        </div>
+        {/* Active panel content — capped at 380px scroll */}
+        <div style={{ maxHeight: 380, overflowY: 'auto' }}>
+          <MobilePanel tab={activeTab} layoffs={layoffs} jobs={jobs} questions={questions} loading={loading} onSelectCompany={onSelectCompany} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ display: 'flex', height: '100%', background: '#060d1a', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
@@ -389,6 +424,80 @@ export default function BottomPanels({ onSelectCompany }: Props) {
         div::-webkit-scrollbar { width: 2px }
         div::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 2px }
       `}</style>
+    </div>
+  );
+}
+
+// ── Mobile panel content ────────────────────────────────────────────────────
+function MobilePanel({ tab, layoffs, jobs, questions, loading, onSelectCompany }: {
+  tab: 'layoffs'|'jobs'|'questions'|'talent';
+  layoffs: any[]; jobs: any[]; questions: any[];
+  loading: { layoffs: boolean; jobs: boolean; questions: boolean };
+  onSelectCompany: (c: any) => void;
+}) {
+  if (tab === 'layoffs') return (
+    <div>
+      {loading.layoffs ? <Spinner /> : layoffs.slice(0, 20).map((item, i) => (
+        <button key={i} onClick={() => item.lat && onSelectCompany({ ...item, type: 'layoff' })}
+          style={{ width: '100%', textAlign: 'left', background: 'none', border: 'none', borderBottom: '1px solid rgba(255,255,255,0.04)', padding: '10px 14px', cursor: 'pointer', display: 'flex', gap: 10, alignItems: 'center' }}>
+          <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#ef4444', flexShrink: 0 }} />
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, color: '#e2e8f0', display: 'flex', justifyContent: 'space-between' }}>
+              <span>{item.company}</span>
+              <span style={{ color: '#ef4444', fontFamily: 'monospace' }}>{item.count?.toLocaleString()}</span>
+            </div>
+            <div style={{ fontSize: 10, color: '#475569', marginTop: 2 }}>{item.sector} · {item.date}</div>
+          </div>
+        </button>
+      ))}
+    </div>
+  );
+
+  if (tab === 'jobs') return (
+    <div>
+      {loading.jobs ? <Spinner /> : jobs.slice(0, 20).map((job, i) => (
+        <a key={i} href={job.url} target="_blank" rel="noopener noreferrer"
+          style={{ display: 'block', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.04)', padding: '10px 14px' }}>
+          <div style={{ fontSize: 12, fontWeight: 700, color: '#22c55e' }}>{job.company}</div>
+          <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{job.role}</div>
+          <div style={{ fontSize: 10, color: '#334155', marginTop: 2 }}>{job.location} · {job.type}</div>
+        </a>
+      ))}
+    </div>
+  );
+
+  if (tab === 'questions') return (
+    <div>
+      {loading.questions ? <Spinner /> : questions.slice(0, 15).map((q, i) => (
+        <a key={i} href={`https://interviewcoder.co/questions?postId=${q.postId}`} target="_blank" rel="noopener noreferrer"
+          style={{ display: 'block', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.04)', padding: '10px 14px' }}>
+          <div style={{ fontSize: 11, fontWeight: 700, color: '#818cf8' }}>{q.company}</div>
+          <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 3, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' } as any}>{q.question}</div>
+          <div style={{ marginTop: 5, display: 'flex', gap: 4, flexWrap: 'wrap' as const }}>
+            {q.tags?.slice(0,3).map((t: string, j: number) => (
+              <span key={j} style={{ fontSize: 9, padding: '1px 5px', borderRadius: 3, background: 'rgba(99,102,241,0.15)', color: '#818cf8' }}>{t}</span>
+            ))}
+          </div>
+        </a>
+      ))}
+    </div>
+  );
+
+  return (
+    <div>
+      <div style={{ padding: '10px 14px', borderBottom: '1px solid rgba(255,255,255,0.06)', fontSize: 10, color: '#475569' }}>
+        3,820 engineers tracked globally
+      </div>
+      {TALENT_ARCS.map((arc, i) => (
+        <a key={i} href={arc.source} target="_blank" rel="noopener noreferrer"
+          style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.04)', padding: '9px 14px' }}>
+          <div>
+            <div style={{ fontSize: 11, color: '#a78bfa' }}>{arc.label}</div>
+            <div style={{ fontSize: 10, color: '#334155', marginTop: 2 }}>{arc.label}</div>
+          </div>
+          <span style={{ fontSize: 12, fontWeight: 700, color: '#818cf8', fontFamily: 'monospace' }}>{arc.count.toLocaleString()}</span>
+        </a>
+      ))}
     </div>
   );
 }
